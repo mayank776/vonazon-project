@@ -59,6 +59,10 @@ def classify_ticket(ticket_text: str) -> Optional[ClassifiedTicket]:
         * Use 1.0 for a perfect match (e.g., "invoice" -> BILLING).
         * Use 0.5 for a guess (e.g., "my account" -> could be TECHNICAL or BILLING).
         * Use 0.0 for a total guess on a vague ticket.
+    
+    * **next_step:**
+        * Provide the immediate follow-up action or message to relay to the user.
+        * For example, for a billing issue, use: 'A human agent will review this billing issue shortly.'
     ---
     """
 

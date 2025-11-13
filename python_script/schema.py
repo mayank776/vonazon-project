@@ -39,6 +39,9 @@ class TicketAnalysis(BaseModel):
     confidence_score: float = Field(
         description="A self-assessed confidence score from 0.0 (total guess) to 1.0 (very certain) for the chosen category."
     )
+    next_step: str = Field(
+        description="The immediate follow-up action or message to relay to the user (e.g., 'A human agent will review this issue shortly.')."
+    )
 
 
 class ClassifiedTicket(TicketAnalysis):
