@@ -12,10 +12,16 @@ from google.adk.models.lite_llm import LiteLlm
 
 OLLAMA_MODEL = 'ollama_chat/qwen3:8b'
 
+
+if False:
+    model = LiteLlm(OLLAMA_MODEL)
+else:
+    model = 'gemini-2.5-flash'
+
 from python_script.script import classify_ticket
 
 root_agent = Agent(
-    model=LiteLlm(OLLAMA_MODEL),
+    model=model,
     name='triage_agent',
     description="A helpful assistant that analyzes and classifies customer support tickets.",
     instruction=(

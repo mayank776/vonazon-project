@@ -14,15 +14,6 @@ Vonazon/
     └── agent.py          # ADK agent implementation
 ```
 
-## Prerequisites
-
-- Python 3.8+
-- Ollama installed and running locally
-- Required Python packages:
-  ```bash
-  pip install -r requirements.txt
-  ```
-
 ## Installation
 
 1. Clone the repository
@@ -43,8 +34,7 @@ Vonazon/
 Run the classifier directly for batch processing of tickets:
 
 ```bash
-cd python_script
-python script.py "My invoice shows an incorrect charge"
+python -m python_script.script
 ```
 
 Expected output:
