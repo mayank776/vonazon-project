@@ -19,7 +19,10 @@ def classify_ticket(ticket_text: str) -> Optional[ClassifiedTicket]:
     if ticket_text is None or not str(ticket_text).strip():
         return None
 
-    print(f"--- Classifying: '{ticket_text}' ---")
+    print("\n" + "="*60)
+    print(f"   🔍  Classifying Ticket:  {ticket_text}")
+    print("="*60 + "\n")
+
 
     system_prompt = f"""
     You are a highly efficient AI Triage Specialist. Your task is to analyze incoming user support tickets. You must classify them, assess their urgency, and provide a concise summary.
@@ -80,7 +83,9 @@ def classify_ticket(ticket_text: str) -> Optional[ClassifiedTicket]:
         )
         
         json_response = response['message']['content']
-        # print(f"[Model Response]: {json_response}")
+        print("\n" + "="*60)
+        print(f"   MODEL RESPONSE:  {json_response}")
+        print("="*60 + "\n")
         
         analysis = TicketAnalysis.model_validate_json(json_response)
 
@@ -89,7 +94,7 @@ def classify_ticket(ticket_text: str) -> Optional[ClassifiedTicket]:
             original_ticket=ticket_text
         )
         
-        print(f"[Classified Ticket]: {classified.json()}")
+        # print(f"[Classified Ticket]: {classified.json()}")
         return classified
 
     except json.JSONDecodeError:
@@ -112,7 +117,6 @@ def mock_crm_send(ticket: ClassifiedTicket):
 if __name__ == "__main__":
     support_tickets = [
         "My invoice shows an extra charge that I didn’t authorize.",
-        "I can’t log in to my account — the system says my password is invalid.",
         "I’d like to learn more about your premium service plans.",
         "When will my refund be processed? This is holding up my entire accounting department!",
         "The app keeps crashing every time I click the 'submit' button.",
