@@ -49,17 +49,26 @@ Pushed to CRM endpoint: Success
 Use the conversational agent for interactive ticket classification:
 
 ```bash
-cd ticket_agent
-python -m google.adk.cli agent.py
+adk web
 ```
 
 Then interact with the agent:
 ```
-> I need help with my login
-Agent: I'll help classify your support ticket.
-[Analyzing ticket...]
-Category: Technical Issue
-Your ticket has been received and routed to our technical support team.
+> My invoice shows an extra charge that I didn’t authorize.
+
+Agent: 
+
+Your ticket has been received and routed.
+
+Here's the classification of your ticket:
+
+Category: Billing
+Urgency Level: Medium
+Summary: User reports an unauthorized extra charge on their invoice.
+Confidence Score: 1
+Is Ambiguous: No
+Original Ticket: My invoice shows an extra charge that I didn’t authorize.
+A human agent will review this billing issue shortly.
 ```
 
 ## Features
@@ -69,6 +78,28 @@ Your ticket has been received and routed to our technical support team.
 - Ticket summarization
 - Multiple interface options
 - Mock CRM integration
+
+---
+
+## Further Enhancements
+
+After setting up the ADK session and runner, you can extend the project with these advanced capabilities:
+
+### 1. **Multi-Agent Architecture**
+
+Create multiple specialized agents (e.g., `TicketClassifier`, `CRMUpdater`, `FeedbackAnalyzer`) and orchestrate them with a shared session service for context-aware collaboration.
+
+### 2. **Persistent Session Management**
+
+Replace the in-memory session service with a persistent backend:
+
+#### Session and Runner
+
+```python
+session_service = InMemorySessionService()
+session = session_service.create_session(app_name=APP_NAME, user_id=USER_ID, session_id=SESSION_ID)
+runner = Runner(agent=agent, app_name=APP_NAME, session_service=session_service)
+```
 
 ## Testing
 
@@ -82,7 +113,7 @@ pytest test_classifier.py -v
 
 The system uses the following models:
 - Script: Qwen 7B (configured in `config.py`)
-- ADK Agent: Qwen 3 8B (configured in `agent.py`)
+- ADK Agent: Qwen 3 8B (configured in `agent.py`) or Google flash agent via api key
 
 ## Error Handling
 

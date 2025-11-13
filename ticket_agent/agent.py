@@ -1,25 +1,21 @@
-import json
-import ollama
-from typing import Optional
-from enum import Enum
-from pydantic import BaseModel, Field
-import os
-import sys
-
 # --- 1. ADK Agent Import ---
 from google.adk.agents import Agent
+from google.adk.tools import FunctionTool
 from google.adk.models.lite_llm import LiteLlm
+from python_script.script import classify_ticket , mock_crm_send
 
+# --- 2. Model Configuration ---
 OLLAMA_MODEL = 'ollama_chat/qwen3:8b'
-
 
 if False:
     model = LiteLlm(OLLAMA_MODEL)
 else:
     model = 'gemini-2.5-flash'
 
-from python_script.script import classify_ticket
+# --- 2. Tool Definition ---
+# send_to_crm = FunctionTool(func=mock_crm_send)
 
+# --- 3. ADK Agent ---
 root_agent = Agent(
     model=model,
     name='triage_agent',
@@ -33,6 +29,7 @@ root_agent = Agent(
         "Confirm that it has been received and routed."
     ),
     tools=[
-        classify_ticket
+        classify_ticket,
+        # send_to_crm,
     ],
 )
