@@ -56,19 +56,16 @@ Then interact with the agent:
 ```
 > My invoice shows an extra charge that I didn’t authorize.
 
-Agent: 
-
-Your ticket has been received and routed.
-
-Here's the classification of your ticket:
-
-Category: Billing
-Urgency Level: Medium
-Summary: User reports an unauthorized extra charge on their invoice.
-Confidence Score: 1
-Is Ambiguous: No
-Original Ticket: My invoice shows an extra charge that I didn’t authorize.
-A human agent will review this billing issue shortly.
+Agent:
+{
+  "Category": "Billing",
+  "Urgency Level": "Medium",
+  "Summary": "User reports an unauthorized extra charge on their invoice.",
+  "Confidence Score": 1,
+  "Is Ambiguous": false,
+  "Original Ticket": "My invoice shows an extra charge that I didn’t authorize.",
+  "Next Step": "A human agent will review this billing issue shortly."
+}
 ```
 
 ## Features
